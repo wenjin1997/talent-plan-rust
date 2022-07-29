@@ -6,7 +6,7 @@
 
 Log-Structured File System 解决了哪些问题呢？
 
-我们知道CPU的速度很快s但是磁盘读写的速度较慢。对于磁盘上的读操作，随着缓存容量的增加，比较好解决，出现速度限制的就是磁盘上的写操作。Log-Structured File System 就是考虑如何高效地进行磁盘的写操作，特别是一些小的文件的频繁写操作，比如办公和工程环境。
+我们知道CPU的速度很快但是磁盘读写的速度较慢。对于磁盘上的读操作，随着缓存容量的增加，比较好解决，出现速度限制的就是磁盘上的写操作。Log-Structured File System 就是考虑如何高效地进行磁盘的写操作，特别是一些小的文件的频繁写操作，比如办公和工程环境。
 
 ### LFS 数据结构
 
@@ -77,12 +77,13 @@ LFS对此做了结合：
 ## Bitcask
 Bitcask 可以达到如下的目标：
 > • low latency per item read or written
->  • high throughput, especially when writing an incoming stream of random items
->  • ability to handle datasets much larger than RAM w/o degradation
->  • crash friendliness, both in terms of fast recovery and not losing data
->  • ease of backup and restore
->  • a relatively simple, understandable (and thus supportable) code structure and data format • predictable behavior under heavy access load or large volume
->  • a license that allowed for easy default use in Riak
+> • high throughput, especially when writing an incoming stream of random items
+> • ability to handle datasets much larger than RAM w/o degradation
+> • crash friendliness, both in terms of fast recovery and not losing data
+> • ease of backup and restore
+> • a relatively simple, understandable (and thus supportable) code structure and data format 
+> • predictable behavior under heavy access load or large volume
+> • a license that allowed for easy default use in Riak
 
 它的内部结构是这样的，有 active data file，当这个写满时，就创建一个新的 active data file。
 
@@ -129,7 +130,7 @@ Rust’s collections can be grouped into four major categories:
 * Sets：只考虑 key 的时候
 * BinaryHeap：优先队列
 
-看看一些方法的复杂度，`*`后缀表示均摊复杂度，`~`表示期望的复杂度，HashMaap的复杂度会取决于哈希值是如何设计计算的。
+看看一些方法的复杂度，`*`后缀表示均摊复杂度，`~`表示期望的复杂度，HashMap的复杂度会取决于哈希值是如何设计计算的。
 
 #### [Sequences](https://doc.rust-lang.org/std/collections/#sequences)
 
