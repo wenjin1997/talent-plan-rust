@@ -73,7 +73,44 @@ LFS对此做了结合：
 #### **Roll-forward**
 
 > In order to recover as much information as possible, Sprite LFS scans through the log segments that were written after the last checkpoint. This operation is called *roll-forward*.
->
+
+## Bitcask
+Bitcask 可以达到如下的目标：
+> • low latency per item read or written
+>  • high throughput, especially when writing an incoming stream of random items
+>  • ability to handle datasets much larger than RAM w/o degradation
+>  • crash friendliness, both in terms of fast recovery and not losing data
+>  • ease of backup and restore
+>  • a relatively simple, understandable (and thus supportable) code structure and data format • predictable behavior under heavy access load or large volume
+>  • a license that allowed for easy default use in Riak
+
+它的内部结构是这样的，有 active data file，当这个写满时，就创建一个新的 active data file。
+
+![image-20220724104116436](/Users/jinjin/code/talent-plan-rust/rust/building-blocks/img/image-20220724104116436.png)
+
+在 active data file 中数据都是顺序写入，这样顺序写入是不需要进行磁盘查找的。写入的数据格式是这样的：
+
+![image-20220724104333987](/Users/jinjin/code/talent-plan-rust/rust/building-blocks/img/image-20220724104333987.png)
+
+那么在 active data file 中数据就是如下的线性结构：
+
+![image-20220724104421157](/Users/jinjin/code/talent-plan-rust/rust/building-blocks/img/image-20220724104421157.png)
+
+当扩展完成的时候，存储中有"keydir"的结构会进行更新，实际上就是一个简单的哈希表。
+
+![image-20220724104545671](/Users/jinjin/code/talent-plan-rust/rust/building-blocks/img/image-20220724104545671.png)
+
+当写入新的数据时，keydir会自动更新。要读取数据时，步骤如下：
+
+![image-20220724104711940](/Users/jinjin/code/talent-plan-rust/rust/building-blocks/img/image-20220724104711940.png)
+
+由于是顺序写入，总会有将磁盘写满的时候，那怎么处理呢？merge process 会处理所有的 non-active 文件，并且产生一系列数据文件，只包含 “live” 和每个存在的键的最新版本的文件。
+
+![image-20220724104830308](/Users/jinjin/code/talent-plan-rust/rust/building-blocks/img/image-20220724104830308.png)
+
+注意到还有一个 hint 文件，它的作用是：
+
+> When a Bitcask is opened by an Erlang process, it checks to see if there is already another Erlang process in the same VM that is using that Bitcask. If so, it will share the keydir with that process. If not, it scans all of the data files in a directory in order to build a new keydir. For any data file that has a hint file, that will be scanned instead for a much quicker startup time.
 
 ## `std::collections`
 Rust’s collections can be grouped into four major categories:
@@ -242,3 +279,18 @@ RON相比JSON的优势：
 > - field names aren't quoted, so it's less verbose
 > - optional struct names improve readability
 > - enums are supported (and less verbose than their JSON representation)
+
+最终实现代码见 [serde-ron.rs]()。
+
+比较一下JSON格式和RON格式：
+
+```
+{"Up":56}  // JSON 格式
+Up(56)     // RON 格式
+```
+
+### **Exercise: Serialize and deserialize 1000 data structures with `serde` (BSON)**.
+
+什么是BSON：
+
+> - [BSON](https://github.com/mongodb/bson-rust), the data storage and network transfer format used by MongoDB.
