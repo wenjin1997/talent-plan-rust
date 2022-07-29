@@ -152,7 +152,7 @@ impl Object {
 
 下面梳理一下 `KvStore` 的结构与实现：
 
-![image-20220729161125887](/Users/jinjin/code/talent-plan-rust/rust/projects/img/image-20220729161125887.png)
+![image-20220729161125887](/rust/projects/img/image-20220729161125887.png)
 
 ```rust
 pub struct KvStore {
@@ -185,7 +185,7 @@ cargo run --bin kvs -- set c c
 
 可以看到生成了三个日志文件，`1.log` 文件的内容就是命令序列化为 JSON 格式后的内容。
 
-![image-20220729161556384](/Users/jinjin/code/talent-plan-rust/rust/projects/img/image-20220729161556384.png)
+![image-20220729161556384](/rust/projects/img/image-20220729161556384.png)
 
 继续执行如下命令：
 
@@ -261,10 +261,10 @@ current_gen: 7
 
 那么最终日志文件长什么样呢？
 
-![image-20220729163332222](/Users/jinjin/code/talent-plan-rust/rust/projects/img/image-20220729163332222.png)
+![image-20220729163332222](/rust/projects/img/image-20220729163332222.png)
 
-![image-20220729163349418](/Users/jinjin/code/talent-plan-rust/rust/projects/img/image-20220729163349418.png)
+![image-20220729163349418](/rust/projects/img/image-20220729163349418.png)
 
 在`6.log` 中可以看到对旧的命令做了删除，而 `7.log`是空的。如果再执行一条命令 `cargo run --bin kvs -- set d d ` ，新的日志会顺序写入到 `8.log` 中。
 
-![image-20220729163615078](/Users/jinjin/code/talent-plan-rust/rust/projects/img/image-20220729163615078.png)
+![image-20220729163615078](/rust/projects/img/image-20220729163615078.png)

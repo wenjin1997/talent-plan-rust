@@ -86,27 +86,27 @@ Bitcask 可以达到如下的目标：
 
 它的内部结构是这样的，有 active data file，当这个写满时，就创建一个新的 active data file。
 
-![image-20220724104116436](/Users/jinjin/code/talent-plan-rust/rust/building-blocks/img/image-20220724104116436.png)
+![image-20220724104116436](/rust/building-blocks/img/image-20220724104116436.png)
 
 在 active data file 中数据都是顺序写入，这样顺序写入是不需要进行磁盘查找的。写入的数据格式是这样的：
 
-![image-20220724104333987](/Users/jinjin/code/talent-plan-rust/rust/building-blocks/img/image-20220724104333987.png)
+![image-20220724104333987](/rust/building-blocks/img/image-20220724104333987.png)
 
 那么在 active data file 中数据就是如下的线性结构：
 
-![image-20220724104421157](/Users/jinjin/code/talent-plan-rust/rust/building-blocks/img/image-20220724104421157.png)
+![image-20220724104421157](/rust/building-blocks/img/image-20220724104421157.png)
 
 当扩展完成的时候，存储中有"keydir"的结构会进行更新，实际上就是一个简单的哈希表。
 
-![image-20220724104545671](/Users/jinjin/code/talent-plan-rust/rust/building-blocks/img/image-20220724104545671.png)
+![image-20220724104545671](/rust/building-blocks/img/image-20220724104545671.png)
 
 当写入新的数据时，keydir会自动更新。要读取数据时，步骤如下：
 
-![image-20220724104711940](/Users/jinjin/code/talent-plan-rust/rust/building-blocks/img/image-20220724104711940.png)
+![image-20220724104711940](/rust/building-blocks/img/image-20220724104711940.png)
 
 由于是顺序写入，总会有将磁盘写满的时候，那怎么处理呢？merge process 会处理所有的 non-active 文件，并且产生一系列数据文件，只包含 “live” 和每个存在的键的最新版本的文件。
 
-![image-20220724104830308](/Users/jinjin/code/talent-plan-rust/rust/building-blocks/img/image-20220724104830308.png)
+![image-20220724104830308](/rust/building-blocks/img/image-20220724104830308.png)
 
 注意到还有一个 hint 文件，它的作用是：
 
