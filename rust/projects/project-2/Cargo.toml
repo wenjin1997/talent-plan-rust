@@ -1,7 +1,7 @@
 [package]
 name = "kvs"
 version = "0.1.0"
-authors = ["wen jin<wenjin197@163.com>"]
+authors = ["wen jin<wenjinsmail@163.com>"]
 description = "A key-value store"
 edition = "2018"
 

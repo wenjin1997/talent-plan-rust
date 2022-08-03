@@ -1,0 +1,49 @@
+<mxfile host="65bd71144e">
+    <diagram id="NnsXx7Dr3Ushm3_atiIQ" name="第 1 页">
+        <mxGraphModel dx="517" dy="492" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="17" style="edgeStyle=orthogonalEdgeStyle;curved=1;html=1;entryX=0;entryY=0.25;entryDx=0;entryDy=0;fontSize=15;exitX=1;exitY=0.25;exitDx=0;exitDy=0;" parent="1" source="2" target="3" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="2" value="&lt;font style=&quot;font-size: 18px&quot;&gt;KvsClient&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="80" y="160" width="120" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="15" style="edgeStyle=orthogonalEdgeStyle;curved=1;html=1;entryX=0.25;entryY=0;entryDx=0;entryDy=0;fontSize=15;exitX=0.25;exitY=1;exitDx=0;exitDy=0;" parent="1" source="3" target="5" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="18" style="edgeStyle=orthogonalEdgeStyle;curved=1;html=1;entryX=1;entryY=0.75;entryDx=0;entryDy=0;fontSize=15;exitX=0;exitY=0.75;exitDx=0;exitDy=0;" parent="1" source="3" target="2" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="3" value="&lt;font style=&quot;font-size: 18px&quot;&gt;KvsSever&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="354" y="160" width="120" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="8" value="" style="group" parent="1" vertex="1" connectable="0">
+                    <mxGeometry x="354" y="280" width="120" height="190" as="geometry"/>
+                </mxCell>
+                <mxCell id="5" value="&lt;br&gt;&lt;br&gt;&lt;br&gt;set&lt;br&gt;get&lt;br&gt;remove" style="rounded=1;whiteSpace=wrap;html=1;fontSize=18;" parent="8" vertex="1">
+                    <mxGeometry width="120" height="190" as="geometry"/>
+                </mxCell>
+                <mxCell id="4" value="&lt;font style=&quot;font-size: 18px&quot;&gt;KvsEngine&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="8" vertex="1">
+                    <mxGeometry x="10" y="30.0022222222222" width="100" height="33.33333333333333" as="geometry"/>
+                </mxCell>
+                <mxCell id="11" value="&lt;font style=&quot;font-size: 15px&quot;&gt;SledKvsEngine&lt;/font&gt;" style="shape=datastore;whiteSpace=wrap;html=1;fontSize=18;" parent="1" vertex="1">
+                    <mxGeometry x="234" y="520" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="12" value="&lt;font style=&quot;font-size: 15px&quot;&gt;KvStore&lt;/font&gt;" style="shape=datastore;whiteSpace=wrap;html=1;fontSize=18;" parent="1" vertex="1">
+                    <mxGeometry x="474" y="520" width="60" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="13" style="edgeStyle=orthogonalEdgeStyle;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=15;curved=1;" parent="1" source="5" target="11" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="14" style="edgeStyle=orthogonalEdgeStyle;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=15;curved=1;" parent="1" source="5" target="12" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="16" style="edgeStyle=orthogonalEdgeStyle;curved=1;html=1;entryX=0.75;entryY=1;entryDx=0;entryDy=0;fontSize=15;exitX=0.75;exitY=0;exitDx=0;exitDy=0;" parent="1" source="5" target="3" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>
