@@ -21,7 +21,7 @@
 
 ## Part 1: Error handling
 
-错误处理，这里用到 failure crate，[使用文档](https://github.com/pingcap/talent-plan/blob/master/courses/rust/projects/project-2/README.md)笔记如下：
+错误处理，这里用到 failure crate，[使用文档](https://boats.gitlab.io/failure/)笔记如下：
 
 ### The `Fail` trait
 
