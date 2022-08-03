@@ -100,7 +100,7 @@ let root = Logger::root(Duplicate::new(
 ).fuse(), o!());
 ```
 
-![image-20220801155759678](/Users/jinjin/code/wenjin1997/.vuepress/public/image-20220801155759678.png)
+![image-20220801155759678](/rust/building-blocks/img/image-20220801155759678.png)
 
 ### Loggers
 
