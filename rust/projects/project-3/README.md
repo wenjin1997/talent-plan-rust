@@ -204,9 +204,9 @@ See [the user guide](https://bheisler.github.io/criterion.rs/book/index.html) fo
 
 运行 `cargo bench` 得到的结果为：
 
-![image-20220803190023145](/Users/jinjin/code/talent-plan-rust/rust/projects/img/image-20220803190023145.png)
+![image-20220803190023145](/rust/projects/img/image-20220803190023145.png)
 
-![image-20220803190043783](/Users/jinjin/code/talent-plan-rust/rust/projects/img/image-20220803190043783.png)
+![image-20220803190043783](/rust/projects/img/image-20220803190043783.png)
 
 可以看到应该是 sled 比较快些。
 
@@ -214,28 +214,28 @@ See [the user guide](https://bheisler.github.io/criterion.rs/book/index.html) fo
 
 由于有客户端和服务端，需要开启两个终端来运行。首先运行服务端：
 
-![image-20220803183813908](/Users/jinjin/code/talent-plan-rust/rust/projects/img/image-20220803183813908.png)
+![image-20220803183813908](/rust/projects/img/image-20220803183813908.png)
 
 我们看到已经在进行监听了，时刻准备着服务。由于这是第一次运行，会在当前文件夹下创建 engine 文件和日志文件，目前日志中为空，等待客户端输入命令。
 
-![image-20220803183938290](/Users/jinjin/code/talent-plan-rust/rust/projects/img/image-20220803183938290.png)
+![image-20220803183938290](/rust/projects/img/image-20220803183938290.png)
 
 现在客户端设置两个值，可以看到对应的日志文件中也会写入相应的命令。
 
-![image-20220803184226113](/Users/jinjin/code/talent-plan-rust/rust/projects/img/image-20220803184226113.png)
+![image-20220803184226113](/rust/projects/img/image-20220803184226113.png)
 
-![image-20220803184245992](/Users/jinjin/code/talent-plan-rust/rust/projects/img/image-20220803184245992.png)
+![image-20220803184245992](/rust/projects/img/image-20220803184245992.png)
 
 下面来运行 sled engine。
 
-![image-20220803184544876](/Users/jinjin/code/talent-plan-rust/rust/projects/img/image-20220803184544876.png)
+![image-20220803184544876](/rust/projects/img/image-20220803184544876.png)
 
 可以看到在文件目录下多了 db 、conf文件，以及 engine 中以及更改成 sled。
 
-![image-20220803184629138](/Users/jinjin/code/talent-plan-rust/rust/projects/img/image-20220803184629138.png)
+![image-20220803184629138](/rust/projects/img/image-20220803184629138.png)
 
 运行结果如下：
 
-![image-20220803184917309](/Users/jinjin/code/talent-plan-rust/rust/projects/img/image-20220803184917309.png)
+![image-20220803184917309](/rust/projects/img/image-20220803184917309.png)
 
 如果服务端的端口号更改了，不是默认设置的，那么客户端也必须在该端口号下进行请求。
