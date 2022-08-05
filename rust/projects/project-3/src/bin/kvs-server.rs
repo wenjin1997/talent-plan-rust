@@ -48,6 +48,15 @@ arg_enum! {
 fn main() {
     env_logger::builder().filter_level(LevelFilter::Info).init();
     let mut cli = Cli::from_args();
+    // and_then 函数
+    // Calls op if the result is Ok, otherwise returns the Err value of self.
+    // This function can be used for control flow based on Result values.
+    //  pub fn and_then<U, F: FnOnce(T) -> Result<U, E>>(self, op: F) -> Result<U, E> {
+    //         match self {
+    //             Ok(t) => op(t),
+    //             Err(e) => Err(e),
+    //         }
+    //     }
     let res = current_engine().and_then(move |curr_engine| {
         if cli.engine.is_none() {
             cli.engine = curr_engine;

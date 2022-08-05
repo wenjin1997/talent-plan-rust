@@ -10,6 +10,15 @@ use serde_json::de::{Deserializer, IoRead};
 
 /// 键值对存储的客户端。
 pub struct KvsClient {
+    // serde_json::de::Deserializer
+    //      A structure that deserializes JSON into Rust values.
+    //      pub struct Deserializer<R>
+    //
+    // serde_json::de::IoRead
+    //      JSON input source that reads from a std::io input stream.
+    //      pub struct IoRead<R>
+    //      where
+    //          R: io::Read,
     reader: Deserializer<IoRead<BufReader<TcpStream>>>,
     writer: BufWriter<TcpStream>,
 }

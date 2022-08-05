@@ -157,15 +157,48 @@ For this project, the server is synchronous and single-threaded. That means that
 
 sled 文档: [crate sled](https://docs.rs/sled/latest/sled/)。
 
-`sled` is a high-performance embedded database with an API that is similar to a `BTreeMap<[u8], [u8]>`, but with several additional capabilities for assisting creators of stateful systems.
+`sled`是一个高性能的嵌入式数据库，其API类似于`BTreeMap<[u8],[u8]>`，但是有一些额外的功能来帮助有状态系统的创建者。
 
-It is fully thread-safe, and all operations are atomic. Multiple `Tree`s with isolated keyspaces are supported with the [`Db::open_tree`](https://docs.rs/sled/latest/sled/struct.Db.html#method.open_tree) method.
+它是完全线程安全的，所有的操作都是原子的。`Db::open_tree` 方法支持具有隔离键空间的多个 `Tree`s。
 
-ACID transactions involving reads and writes to multiple items are supported with the [`Tree::transaction`](https://docs.rs/sled/latest/sled/struct.Tree.html#method.transaction) method. Transactions may also operate over multiple `Tree`s (see [`Tree::transaction`](https://docs.rs/sled/latest/sled/struct.Tree.html#method.transaction) docs for more info).
+`Tree::transaction`方法支持设计多个项目的读取和写入的ACID事务。事务也可以在多个 `Tree`s上运行。
+
+> **ACID**，是指[数据库管理系统](https://zh.m.wikipedia.org/wiki/数据库管理系统)（[DBMS](https://zh.m.wikipedia.org/wiki/DBMS)）在写入或更新资料的过程中，为保证[事务](https://zh.m.wikipedia.org/wiki/数据库事务)（transaction）是正确可靠的，所必须具备的四个特性：[原子性](https://zh.m.wikipedia.org/w/index.php?title=原子性&action=edit&redlink=1)（英语：[Atomicity (database systems)](https://en.wikipedia.org/wiki/Atomicity_(database_systems))）（atomicity，或称不可分割性）、[一致性](https://zh.m.wikipedia.org/wiki/一致性_(数据库))（consistency）、[隔离性](https://zh.m.wikipedia.org/wiki/隔離性)（isolation，又称独立性）、[持久性](https://zh.m.wikipedia.org/wiki/持久性)（durability）。
 
 Users may also subscribe to updates on individual `Tree`s by using the [`Tree::watch_prefix`](https://docs.rs/sled/latest/sled/struct.Tree.html#method.watch_prefix) method, which returns a blocking `Iterator` over updates to keys that begin with the provided prefix. You may supply an empty prefix to subscribe to everything.
 
 [Merge operators](https://github.com/spacejam/sled/wiki/merge-operators) (aka read-modify-write operators) are supported. A merge operator is a function that specifies how new data can be merged into an existing value without requiring both a read and a write. Using the [`Tree::merge`](https://docs.rs/sled/latest/sled/struct.Tree.html#method.merge) method, you may “push” data to a `Tree` value and have the provided merge operator combine it with the existing value, if there was one. They are set on a per-`Tree` basis, and essentially allow any sort of data structure to be built using merges as an atomic high-level operation.
+
+```rust
+let db: sled::Db = sled::open("my_db").unwrap();
+
+// insert and get
+db.insert(b"yo!", b"v1");
+assert_eq!(&db.get(b"yo!").unwrap().unwrap(), b"v1");
+
+// Atomic compare-and-swap.
+db.compare_and_swap(
+    b"yo!",      // key
+    Some(b"v1"), // old value, None for not present
+    Some(b"v2"), // new value, None for delete
+)
+.unwrap();
+
+// Iterates over key-value pairs, starting at the given key.
+let scan_key: &[u8] = b"a non-present key before yo!";
+let mut iter = db.range(scan_key..);
+assert_eq!(&iter.next().unwrap().unwrap().0, b"yo!");
+assert_eq!(iter.next(), None);
+
+db.remove(b"yo!");
+assert_eq!(db.get(b"yo!"), Ok(None));
+
+let other_tree: sled::Tree = db.open_tree(b"cool db facts").unwrap();
+other_tree.insert(
+    b"k1",
+    &b"a Db acts like a Tree due to implementing Deref<Target = Tree>"[..]
+).unwrap();
+```
 
 ## Part 6: Benchmarking
 
