@@ -9,6 +9,6 @@
   - [x] [Project 2: Log-structured file I/O](/rust/projects/project-2/README.md)
   - [x] [Building Blocks 3](/rust/building-blocks/bb-3/README.md)
   - [x] [Project 3: Synchronous client-server networking](/rust/projects/project-3/README.md)
-  - [ ] [Building Blocks 4]()
-  - [ ] [Project 4: Concurrency and Parallelism]()
+  - [x] [Building Blocks 4](/rust/building-blocks/bb-4/README.md)
+  - [x] [Project 4: Concurrency and Parallelism](/rust/projects/project-4/README.md)
 - [ ] Distributed Systems in Rust

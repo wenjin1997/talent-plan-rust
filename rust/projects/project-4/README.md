@@ -1,5 +1,7 @@
 # PNA Rust Project 4: Concurrency and parallelism
 
+## `std::sync::atomic::Ordering`
+
 Rust 中`std::sync::atomic::Ordering` 和 C++20 里含义一样，参考 [程序员的自我修养（⑫）：C++ 的内存顺序·中](https://liam.page/2021/12/11/memory-order-cpp-02/)。
 
 ```rust
@@ -148,3 +150,25 @@ impl<T: ?Sized> RcBoxPtr<T> for Rc<T> {
    }
 }
 ```
+
+## 线程池的创建
+
+### `Crate crossbeam::channel`
+
+通过消息传递的多生产者多消费者的通道。
+
+这是一个`std::sync::mpsc`的替代的包，有更多的特性和更好的表现。
+
+```rust
+use crossbeam_channell::unbounded;
+
+// Create a channel of unbounded capacity.
+let (s, r) = unbounded();
+
+// Send a message into the channel.
+s.send("Hello, world!").unwrap();
+
+// Receive the message from the channel.
+assert_eq!(r.recv(), Ok("Hello world!"));
+```
+
